@@ -7,7 +7,9 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || 5000;
 
-    this.paths = {};
+    this.paths = {
+      auth: "/api/auth",
+    };
 
     this.connectDB();
     this.middlewares();
@@ -31,7 +33,9 @@ class Server {
     this.app.use(express.static("public"));
   }
 
-  routes() {}
+  routes() {
+    this.app.use(this.paths.auth, require("../routes/authRoutes"))
+  }
 
   listen() {
     this.app.listen(this.port, () => {
