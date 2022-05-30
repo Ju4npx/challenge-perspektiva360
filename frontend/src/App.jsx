@@ -1,7 +1,13 @@
-import "./App.css";
+import HomeScreen from "./components/HomeScreen";
+import LoginScreen from "./components/auth/LoginScreen";
+import RegisterScreen from "./components/auth/RegisterScreen";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <HomeScreen />
+    </>
+  );
 }
 
 export default App;
