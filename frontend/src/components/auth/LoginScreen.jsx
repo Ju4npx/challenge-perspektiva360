@@ -34,10 +34,10 @@ const LoginScreen = () => {
   };
 
   return (
-    <main className="content content--auth">
-      <section className="auth">
+    <main className="content content--main">
+      <section className="main">
         <div className="relative-container">
-          <div className="auth__logo">
+          <div className="main__logo">
             <img className="logo" src={logo} alt="logo" />
           </div>
         </div>
@@ -70,7 +70,7 @@ const LoginScreen = () => {
             </div>
           </div>
           <div className="relative-container">
-            <button type="submit" className="btn btn-primary btn--auth">
+            <button type="submit" className="btn btn-primary btn--main">
               Acceder
             </button>
           </div>
