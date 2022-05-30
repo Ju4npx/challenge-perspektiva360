@@ -60,8 +60,10 @@ backend **.env** file setup example:
 
 ```shell
 PORT=5000
-MONGODB_CNN=mongodb+srv://user:password@cluster.rgq1n.mongodb.net/schema
-JWT_SECRET_KEY=RANDOMKEY
+FRONTEND_URL="http://localhost:3000"
+
+MONGODB_CNN="mongodb+srv://user:password@cluster.rgq1n.mongodb.net/schema"
+JWT_SECRET_KEY="RANDOMKEY"
 ```
 
 ---
@@ -84,7 +86,7 @@ $ cp .env.example .env
 frontend **.env** file setup example:
 
 ```shell
-VITE_API_URL="http://localhost:5000/api"
+VITE_BACKEND_URL="http://localhost:5000/api"
 ```
 
 ## Deployment 📦
