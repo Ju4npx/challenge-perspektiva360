@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import cover from "../assets/images/cover.png";
 import logo from "../assets/images/logo.png";
 
@@ -18,7 +19,9 @@ const HomeScreen = () => {
             <div className="home__heading">
               <div className="home__heading-text">
                 <span className="home__heading-text-title">Bienvenidos</span>
-                <span className="home__heading-text-subtitle">a la Feria Virtual</span>
+                <span className="home__heading-text-subtitle">
+                  a la Feria Virtual
+                </span>
               </div>
             </div>
             <div className="home__subheading">
@@ -27,7 +30,9 @@ const HomeScreen = () => {
                 <br />
                 la experiencia virtual.
               </span>
-              <button className="btn btn-primary btn--home">Registrarme</button>
+              <Link className="btn btn-primary btn--home" to={"/auth/register"}>
+                Registrarme
+              </Link>
               <div className="home__subheading-logo">
                 <div className="vertical-indicator">
                   <span className="vertical-circle"></span>

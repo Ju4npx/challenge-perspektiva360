@@ -1,13 +1,7 @@
-import HomeScreen from "./components/HomeScreen";
-import LoginScreen from "./components/auth/LoginScreen";
-import RegisterScreen from "./components/auth/RegisterScreen";
+import AppRouter from "./routers/AppRouter";
 
 function App() {
-  return (
-    <>
-      <HomeScreen />
-    </>
-  );
+  return <AppRouter />;
 }
 
 export default App;

@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
   const [formValues, handleInputChange] = useForm({
@@ -178,7 +179,9 @@ const RegisterScreen = () => {
         </form>
         <div className="options">
           <span className="options__text">¿Ya tienes una cuenta?</span>
-          <a className="link">Inicia sesión</a>
+          <Link className="link" to={"/auth/login"}>
+            Inicia sesión
+          </Link>
         </div>
       </section>
     </main>

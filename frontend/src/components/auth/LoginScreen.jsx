@@ -1,6 +1,7 @@
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const LoginScreen = () => {
   const [formValues, handleInputChange] = useForm({
@@ -58,7 +59,9 @@ const LoginScreen = () => {
         </form>
         <div className="options">
           <span className="options__text">¿No te has registrado?</span>
-          <a className="link">Crear cuenta</a>
+          <Link className="link" to={"/auth/register"}>
+            Crear cuenta
+          </Link>
         </div>
       </section>
     </main>
