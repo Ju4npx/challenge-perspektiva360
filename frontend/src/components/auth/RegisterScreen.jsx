@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   FaUser,
   FaMobileAlt,
@@ -9,8 +10,10 @@ import {
 } from "react-icons/fa";
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
+import { startRegister } from "../../store/auth/authThunks";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
     firstName: "",
     lastName: "",
@@ -34,7 +37,7 @@ const RegisterScreen = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    dispatch(startRegister(formValues));
   };
 
   return (
