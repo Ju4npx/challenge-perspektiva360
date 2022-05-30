@@ -1,6 +1,6 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-import { fetchWithoutToken } from "../../helpers/fetch";
-import { login } from "./authSlice";
+import { fetchWithoutToken, fetchWithToken } from "../../helpers/fetch";
+import { checkCredentials, login } from "./authSlice";
 
 export const startLogin = (email, password) => (dispatch) => {
   fetchWithoutToken("auth/login", { email, password }, "POST")
@@ -24,5 +24,26 @@ export const startLogin = (email, password) => (dispatch) => {
     .catch((err) => {
       console.log(err);
       Swal.fire("Error", "Please, contact the administrator", "error");
+    });
+};
+
+export const startCheckCredentials = () => (dispatch) => {
+  fetchWithToken("auth/renew")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.ok) {
+        const { user, token } = data;
+
+        localStorage.setItem("token", token);
+
+        dispatch(login(user));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      Swal.fire("Error", "Please, contact the administrator", "error");
+    })
+    .finally(() => {
+      dispatch(checkCredentials());
     });
 };
