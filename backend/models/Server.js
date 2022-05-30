@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const dbConnection = require("../config/database");
 
 class Server {
@@ -9,6 +10,7 @@ class Server {
 
     this.paths = {
       auth: "/api/auth",
+      public: "../public/index.html"
     };
 
     this.connectDB();
@@ -23,7 +25,7 @@ class Server {
   middlewares() {
     this.app.use(
       cors({
-        origin: "http://localhost:3000",
+        origin: process.env.FRONTEND_URL,
         optionsSuccessStatus: 200,
       })
     );
@@ -34,7 +36,10 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.paths.auth, require("../routes/authRoutes"))
+    this.app.use(this.paths.auth, require("../routes/authRoutes"));
+    this.app.get("/*", (req, res) => {
+      res.sendFile(path.join(__dirname, this.paths.public));
+    });
   }
 
   listen() {
