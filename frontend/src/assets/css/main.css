@@ -614,7 +614,7 @@ input:-webkit-autofill:active {
     -ms-border-radius: 30% 0 0 0;
     -o-border-radius: 30% 0 0 0;
     flex-basis: 80%;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   .home__heading-text-title, .home__heading-text-subtitle, .home__subheading {
