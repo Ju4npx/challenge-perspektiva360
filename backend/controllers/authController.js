@@ -34,7 +34,7 @@ const register = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       ok: false,
-      msg: "Please, contact the administrator",
+      msg: "Por favor, contacte con un administrador",
     });
   }
 };
@@ -47,7 +47,7 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         ok: false,
-        msg: "User not found",
+        msg: "Usuario no encontrado",
       });
     }
 
@@ -56,7 +56,7 @@ const login = async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({
         ok: false,
-        msg: "Invalid password",
+        msg: "Contraseña incorrecta",
       });
     }
 
@@ -72,7 +72,7 @@ const login = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       ok: false,
-      msg: "Please, contact the administrator",
+      msg: "Por favor, contacte con un administrador",
     });
   }
 };
@@ -95,7 +95,7 @@ const renewToken = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       ok: false,
-      msg: "Please, contact the administrator",
+      msg: "Por favor, contacte con un administrador",
     });
   }
 };

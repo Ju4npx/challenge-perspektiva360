@@ -11,8 +11,8 @@ const generateJWT = (id, firstName, lastName) => {
       },
       (err, token) => {
         if (err) {
-          console.log("JWT Generation Error", err);
-          reject("Can't generate web token.");
+          console.log("Error al generar JWT", err);
+          reject("No se pudo generar un token.");
         } else {
           resolve(token);
         }

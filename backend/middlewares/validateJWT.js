@@ -6,7 +6,7 @@ const validateJWT = (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       ok: false,
-      msg: "No token provided, please login",
+      msg: "No se ha proporcionado ningun token, por favor, inicie sesion",
     });
   }
 
@@ -22,7 +22,7 @@ const validateJWT = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      msg: "Invalid token, please login again",
+      msg: "Token invalido, por favor, inicie sesion nuevamente",
     });
   }
 

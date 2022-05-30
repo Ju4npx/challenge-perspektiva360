@@ -7,7 +7,7 @@ const emailExists = async (req, res, next) => {
   if (userEmailExists) {
     return res.status(400).json({
       ok: false,
-      msg: `Email ${email} already exists`,
+      msg: `El correo ${email} ya existe`,
     });
   }
 

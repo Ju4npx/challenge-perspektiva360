@@ -3,34 +3,34 @@ const { Schema, model } = require("mongoose");
 const UserSchema = Schema({
   firstName: {
     type: String,
-    required: [true, "First name is required"],
+    required: [true, "El nombre es requerido"],
   },
   lastName: {
     type: String,
-    required: [true, "Last name is required"],
+    required: [true, "El apellido es requerido"],
   },
   telephone: {
     type: Number,
-    required: [true, "Telephone number is required"],
+    required: [true, "El telefono es requerido"],
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, "El email es requerido"],
     lowercase: true,
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    required: [true, "La contraseña es requerida"],
   },
   gender: {
     type: String,
     enum: ["M", "F"],
-    required: [true, "Gender is required"],
+    required: [true, "El genero es requerido"],
   },
   city: {
     type: String,
-    required: [true, "City is required"],
+    required: [true, "La ciudad es requerida"],
   },
 });
 
