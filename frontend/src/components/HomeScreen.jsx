@@ -26,7 +26,7 @@ const HomeScreen = () => {
             </div>
             <div className="home__subheading">
               <span className="home__subheading-text">
-                Regístrate para vivir
+                Registrate para vivir
                 <br />
                 la experiencia virtual.
               </span>

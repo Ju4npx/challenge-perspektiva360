@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import validator from "validator";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import {
   FaUser,
   FaMobileAlt,
@@ -11,6 +13,8 @@ import {
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
 import { startRegister } from "../../store/auth/authThunks";
+
+const VALID_GENDERS = ["M", "F"];
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
@@ -37,7 +41,66 @@ const RegisterScreen = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    dispatch(startRegister(formValues));
+    if (isFormValid()) {
+      dispatch(startRegister(formValues));
+    }
+  };
+
+  const isFormValid = () => {
+    if (firstName.trim().length < 2 || firstName.trim().length > 32) {
+      Swal.fire(
+        "Error",
+        "El nombre debe tener entre 2 y 32 caracteres",
+        "error"
+      );
+      return false;
+    } else if (lastName.trim().length < 2 || lastName.trim().length > 32) {
+      Swal.fire(
+        "Error",
+        "El apellido debe tener entre 2 y 32 caracteres",
+        "error"
+      );
+      return false;
+    } else if (!validator.isNumeric(telephone)) {
+      Swal.fire("Error", "El telefono debe ser numerico", "error");
+      return false;
+    } else if (telephone.trim().length < 7 || telephone.trim().length > 10) {
+      Swal.fire(
+        "Error",
+        "El telefono debe tener entre 7 y 10 caracteres",
+        "error"
+      );
+      return false;
+    } else if (!validator.isEmail(email)) {
+      Swal.fire("Error", "El email no es valido", "error");
+      return false;
+    } else if (password.trim().length === 0) {
+      Swal.fire("Error", "La contraseña es requerida", "error");
+      return false;
+    } else if (
+      !validator.isStrongPassword(password.toString()) ||
+      password.length > 32
+    ) {
+      Swal.fire(
+        "Error",
+        "La contraseña debe tener entre 8 y 32 caracteres, debe incluir 1 numero, 1 simbolo, 1 mayuscula y 1 minuscula",
+        "error"
+      );
+      return false;
+    } else if (password2 !== password) {
+      Swal.fire("Error", "Las contraseñas no coinciden", "error");
+      return false;
+    } else if (gender == "") {
+      Swal.fire("Error", "El genero es requerido", "error");
+      return false;
+    } else if (!validator.isIn(gender, VALID_GENDERS)) {
+      Swal.fire("Error", "El genero debe ser masculino (M) o femenino (F)", "error");
+      return false;
+    } else if (city.trim().length < 2 || city.trim().length > 32) {
+      Swal.fire("Error", "La ciudad debe tener entre 2 y 32 caracteres", "error");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -133,7 +196,7 @@ const RegisterScreen = () => {
               <div className="form__field--radio" onChange={handleInputChange}>
                 <span className="form__field">
                   <FaVenusMars className="form__icon" />
-                  Género
+                  Genero
                 </span>
                 <div
                   className="form__radio-group"
@@ -183,7 +246,7 @@ const RegisterScreen = () => {
         <div className="options">
           <span className="options__text">¿Ya tienes una cuenta?</span>
           <Link className="link" to={"/auth/login"}>
-            Inicia sesión
+            Inicia sesion
           </Link>
         </div>
       </section>

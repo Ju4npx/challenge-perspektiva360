@@ -17,13 +17,13 @@ export const startLogin = (loginData) => (dispatch) => {
           ? data.msg
           : data.errors
           ? data.errors[Object.keys(data.errors)[0]].msg
-          : "Please, reload and try again";
+          : "Por favor, reinicie la sesión e intente nuevamente";
         Swal.fire("Error", msg, "error");
       }
     })
     .catch((err) => {
       console.log(err);
-      Swal.fire("Error", "Please, contact the administrator", "error");
+      Swal.fire("Error", "Por favor, contacte con un administrador", "error");
     });
 };
 
@@ -42,13 +42,13 @@ export const startRegister = (registerData) => (dispatch) => {
           ? data.msg
           : data.errors
           ? data.errors[Object.keys(data.errors)[0]].msg
-          : "Please, reload and try again";
+          : "Por favor, reinicie la sesión e intente nuevamente";
         Swal.fire("Error", msg, "error");
       }
     })
     .catch((err) => {
       console.log(err);
-      Swal.fire("Error", "Please, contact the administrador", "error");
+      Swal.fire("Error", "Por favor, contacte con un administrador", "error");
     });
 };
 
@@ -66,7 +66,7 @@ export const startCheckCredentials = () => (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-      Swal.fire("Error", "Please, contact the administrator", "error");
+      Swal.fire("Error", "Por favor, contacte con un administrador", "error");
     })
     .finally(() => {
       dispatch(checkCredentials());

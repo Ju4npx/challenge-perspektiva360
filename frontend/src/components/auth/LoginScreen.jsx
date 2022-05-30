@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import validator from "validator";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { startLogin } from "../../store/auth/authThunks";
 import useForm from "../../hooks/useForm";
@@ -15,7 +17,20 @@ const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(startLogin({ email, password }));
+    if (isFormValid()) {
+      dispatch(startLogin({ email, password }));
+    }
+  };
+
+  const isFormValid = () => {
+    if (!validator.isEmail(email)) {
+      Swal.fire("Error", "El email no es valido", "error");
+      return false;
+    } else if (password.trim().length === 0) {
+      Swal.fire("Error", "La contraseña es requerida", "error");
+      return false;
+    }
+    return true;
   };
 
   return (
