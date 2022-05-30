@@ -1,6 +1,6 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { fetchWithoutToken, fetchWithToken } from "../../helpers/fetch";
-import { checkCredentials, login } from "./authSlice";
+import { checkCredentials, login, logout } from "./authSlice";
 
 export const startLogin = (email, password) => (dispatch) => {
   fetchWithoutToken("auth/login", { email, password }, "POST")
@@ -46,4 +46,9 @@ export const startCheckCredentials = () => (dispatch) => {
     .finally(() => {
       dispatch(checkCredentials());
     });
+};
+
+export const startLogout = () => (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch(logout());
 };
