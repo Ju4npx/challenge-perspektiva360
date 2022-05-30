@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { startLogin } from "../../store/auth/authThunks";
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const [formValues, handleInputChange] = useForm({
     email: "",
     password: "",
@@ -12,7 +15,7 @@ const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    dispatch(startLogin(email, password));
   };
 
   return (

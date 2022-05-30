@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   FaUser,
   FaMobileAlt,
@@ -8,7 +9,6 @@ import {
 } from "react-icons/fa";
 import useForm from "../../hooks/useForm";
 import logo from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
 
 const RegisterScreen = () => {
   const [formValues, handleInputChange] = useForm({
