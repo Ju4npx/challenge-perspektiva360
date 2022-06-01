@@ -105,10 +105,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Built with 🛠️
 
-* [React](https://reactjs.org/) - Frontend framework
+* [React](https://reactjs.org/) - Frontend
 * [React Redux Tk](https://redux-toolkit.js.org/) - State management
 * [Node.js](https://nodejs.org/) - Javascript runtime environment
-* [Express.js](https://expressjs.com/) - Backend framework
+* [Express.js](https://expressjs.com/) - Backend
 * [MongoDB](https://www.mongodb.com/) - NoSQL database
 
 ---
