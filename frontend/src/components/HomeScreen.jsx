@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import cover from "../assets/images/cover.png";
+import cover from "../assets/images/cover.webp";
 import logo from "../assets/images/logo.png";
 
 const HomeScreen = () => {
