@@ -1,28 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../store/auth/authThunks";
 import logo from "../assets/images/logo.png";
-import { useState } from "react";
-import { startUploadImage } from "../store/images/imageThunks";
+import { useEffect, useState } from "react";
+import { startGetImage, startUploadImage } from "../store/images/imageThunks";
 
 const ProtectedScreen = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const [imageFile, setImageFile] = useState();
+  const { image } = useSelector((state) => state.images);
 
-  const handleLogout = () => {
-    dispatch(startLogout());
-  };
+  useEffect(() => {
+    dispatch(startGetImage());
+  }, []);
 
+  // const [image, setImage] = useState();
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      dispatch(startUploadImage(file))
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = (e) => {
-        setImageFile(reader.result);
-      };
+      dispatch(startUploadImage(file));
+      // const reader = new FileReader();
+      // reader.readAsDataURL(file);
+      // reader.onloadend = (e) => {
+      //   setImage(reader.result);
+      // };
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(startLogout());
   };
 
   return (
@@ -38,10 +43,10 @@ const ProtectedScreen = () => {
             <h1 className="form__title">Cargador de imagenes</h1>
             <div
               className={`uploader__image-container ${
-                imageFile ? "uploader__image-container--attach" : ""
+                image ? "uploader__image-container--attach" : ""
               }`}
             >
-              <img className="uploader__image" src={imageFile} />
+              <img className="uploader__image" src={image} />
             </div>
             <div className="relative-container">
               <label htmlFor="image" className="btn btn-primary btn--main">
