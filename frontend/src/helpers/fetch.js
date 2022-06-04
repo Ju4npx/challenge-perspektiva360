@@ -1,7 +1,7 @@
-const baseUrl = import.meta.env.VITE_BACKEND_URL;
+const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const fetchWithoutToken = (endpoint, data, method = "GET") => {
-  const url = `${baseUrl}/${endpoint}`; // localhost:5000/api/auth
+  const url = `${baseURL}/${endpoint}`; // localhost:5000/api/auth
 
   if (method === "GET") {
     return fetch(url);
@@ -17,7 +17,7 @@ export const fetchWithoutToken = (endpoint, data, method = "GET") => {
 };
 
 export const fetchWithToken = (endpoint, data, method = "GET") => {
-  const url = `${baseUrl}/${endpoint}`; // localhost:5000/api/auth
+  const url = `${baseURL}/${endpoint}`; // localhost:5000/api/auth
   const token = localStorage.getItem("token") || "";
 
   if (method === "GET") {

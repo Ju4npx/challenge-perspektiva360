@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../store/auth/authThunks";
 import logo from "../assets/images/logo.png";
 import { useState } from "react";
+import { startUploadImage } from "../store/images/imageThunks";
 
 const ProtectedScreen = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const ProtectedScreen = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      dispatch(startUploadImage(file))
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = (e) => {
@@ -34,7 +36,11 @@ const ProtectedScreen = () => {
           </div>
           <form className="form">
             <h1 className="form__title">Cargador de imagenes</h1>
-            <div className={`uploader__image-container ${imageFile ? "uploader__image-container--attach" : ""}`}>
+            <div
+              className={`uploader__image-container ${
+                imageFile ? "uploader__image-container--attach" : ""
+              }`}
+            >
               <img className="uploader__image" src={imageFile} />
             </div>
             <div className="relative-container">
