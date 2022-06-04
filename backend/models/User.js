@@ -32,6 +32,9 @@ const UserSchema = Schema({
     type: String,
     required: [true, "La ciudad es requerida"],
   },
+  image: {
+    type: String,
+  },
 });
 
 UserSchema.methods.toJSON = function () {
