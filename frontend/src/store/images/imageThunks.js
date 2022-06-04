@@ -13,12 +13,18 @@ export const startGetImage = () => (dispatch) => {
     },
   });
 
+  let status = 0;
   fetchWithToken("images")
-    .then((res) => res.json())
+    .then((res) => {
+      status = res.status;
+      return res.json();
+    })
     .then((data) => {
       if (data.ok) {
         const { image } = data;
         dispatch(setImage(image));
+        Swal.close();
+      } else if (status === 404) {
         Swal.close();
       } else {
         const msg = data.msg
