@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
-const s3 = new AWS.S3(require("../config/s3"));
 const fs = require("fs");
+const s3 = new AWS.S3(require("../config/s3"));
 const User = require("../models/User");
 
 const folder = "images";
@@ -17,12 +17,10 @@ const getImage = async (req, res) => {
     }
 
     // Get image from s3
-    const image = await s3
-      .getObject({
-        Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `${folder}/${user.image}`,
-      })
-      .promise();
+    const image = await s3.getSignedUrl("getObject", {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `${folder}/${user.image}`,
+    });
 
     return res.json({
       ok: true,
@@ -65,8 +63,8 @@ const updateImage = async (req, res) => {
 
     user.image = fileName;
 
-    // Upload image to s3 and save image name
-    const image = await s3
+    //Upload image to s3 and save image name
+    await s3
       .putObject({
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: `${folder}/${fileName}`,
@@ -74,7 +72,13 @@ const updateImage = async (req, res) => {
       })
       .promise();
 
-    await user.save();
+    const [image] = await Promise.all([
+      s3.getSignedUrl("getObject", {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${folder}/${fileName}`,
+      }),
+      user.save(),
+    ]);
 
     return res.status(201).json({
       ok: true,
