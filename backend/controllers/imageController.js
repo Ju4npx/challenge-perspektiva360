@@ -16,21 +16,25 @@ const getImage = async (req, res) => {
       });
     }
 
-    // Get params
-    const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `${folder}/${user.image}`,
-    };
+    // Get image from s3
+    const image = await s3
+      .getObject({
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${folder}/${user.image}`,
+      })
+      .promise();
 
-    // Get file from s3
-    s3.getObject(params, (err, data) => {
-      if (err) throw err;
-      return res.json({
-        ok: true,
-        image: data,
-      });
+    return res.json({
+      ok: true,
+      image,
     });
   } catch (err) {
+    if (err.code == "NoSuchKey") {
+      return res.status(404).json({
+        ok: false,
+        msg: "Imagen no encontrada",
+      });
+    }
     console.log(err);
     return res.status(500).json({
       ok: false,
@@ -40,6 +44,55 @@ const getImage = async (req, res) => {
 };
 
 const updateImage = async (req, res) => {
+  const { file } = req.files;
+  const { id } = req;
+  try {
+    const user = await User.findById(id);
+    const fileName = `${id}.${file.extension}`;
+
+    // Read file
+    const data = fs.readFileSync(file.tempFilePath);
+
+    // Delete old image if exists
+    if (user.image && user.image !== fileName) {
+      await s3
+        .deleteObject({
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: `${folder}/${user.image}`,
+        })
+        .promise();
+    }
+
+    user.image = fileName;
+
+    // Upload image to s3 and save image name
+    const image = await s3
+      .putObject({
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${folder}/${fileName}`,
+        Body: data,
+      })
+      .promise();
+
+    await user.save();
+
+    return res.status(201).json({
+      ok: true,
+      image,
+    });
+  } catch (err) {
+    if (err.code == "NoSuchKey") {
+      return res.status(404).json({
+        ok: false,
+        msg: "Imagen no encontrada",
+      });
+    }
+    console.log(err);
+    return res.status(500).json({
+      ok: false,
+      msg: "Please, contact the administrator",
+    });
+  }
 };
 
 module.exports = {
