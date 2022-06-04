@@ -4,8 +4,9 @@ Technical test for the company perspektiva360.
 
 * Requirements: <a href="./challenge.pdf" target="_blank">Open PDF</a>
 * Requirements page preview: <a href="./requirements-preview.pdf" target="_blank">Open PDF</a>
+* **New requirement:** Add image upload to AWS S3 Bucket
 
-*MERN, API, CRUD, Frontend image upload.*
+*MERN, API, CRUD, image upload to AWS S3 bucket.*
 
 ## [Try demo](https://perspektiva360-challenge.herokuapp.com/)
 
@@ -29,6 +30,7 @@ Technical test for the company perspektiva360.
 * [Git](https://git-scm.com/)
 * [npm](https://www.npmjs.com/)
 * [Mongo database](https://www.mongodb.com/)
+* [AWS S3 Bucket](https://aws.amazon.com/es/s3/)
 
 ### Installation 🔧
 
@@ -64,6 +66,10 @@ FRONTEND_URL="http://localhost:3000"
 
 MONGODB_CNN="mongodb+srv://user:password@cluster.rgq1n.mongodb.net/schema"
 JWT_SECRET_KEY="RANDOMKEY"
+
+AWS_BUCKET_NAME="my-bucket-name"
+AWS_IAM_USER_KEY="EX4MPLEK3Y"
+AWS_IAM_USER_SECRET="EX4MPLES3CR3T"
 ```
 
 ---
@@ -110,6 +116,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 * [Node.js](https://nodejs.org/) - Javascript runtime environment
 * [Express.js](https://expressjs.com/) - Backend
 * [MongoDB](https://www.mongodb.com/) - NoSQL database
+* [AWS S3](https://aws.amazon.com/es/s3/) - AWS S3 Storage
 
 ---
 ⌨️ with ❤️ by [Juan Pablo Machado](https://github.com/Ju4npx ) 😊 
